@@ -1,0 +1,11 @@
+{
+	"name": "render-deploy",
+	"version": "1.0.0",
+	"main": "index.cjs",
+	"scripts": {
+		"start": "node index.cjs"
+	},
+	"dependencies": {
+		"http": "^0.0.1-security"
+	}
+}
