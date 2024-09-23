@@ -17,12 +17,21 @@ const server = http.createServer((request, response) => {
         response.write(JSON.stringify({ message: 'Welcome to the API!' }));
         response.end();
     } else if(method === 'GET' && url === '/weather'){
-			fetch('https://api.weatherapi.com/v1/current.json?key=99755e46731a4b1b81730018242109&q=14.5625961%2C120.9993082')
+			fetch('https://api.weatherapi.com/v1/current.json?key=99755e46731a4b1b81730018242109&q=14.587039178154653, 120.9761773943609')
 			.then (response=> response.json())
 			.then (data=> {
+				const precip = 3;
+				let rainStatus;
+				if (precip < 2) {
+					rainStatus = 'light rain'
+				} else if (precip < 6) {
+					rainStatus = 'moderate rain'
+				}
+				
 				response.statusCode = 200;
-        response.write(JSON.stringify({ message: data }));
+        response.write(JSON.stringify({ message: rainStatus }));
         response.end();
+
 
 			})
     } else {
