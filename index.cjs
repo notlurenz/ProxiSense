@@ -16,27 +16,15 @@ const server = http.createServer((request, response) => {
         response.statusCode = 200;
         response.write(JSON.stringify({ message: 'Welcome to the API!' }));
         response.end();
-    } else if (method === 'GET' && url === '/users') {
-        // Example endpoint: GET /users
-        const users = [
-            { id: 1, name: 'Alice', age: 25 },
-            { id: 2, name: 'Bob', age: 30 }
-        ];
-        response.statusCode = 200;
-        response.write(JSON.stringify(users));
+    } else if(method === 'GET' && url === '/weather'){
+			fetch('https://api.weatherapi.com/v1/current.json?key=99755e46731a4b1b81730018242109&q=14.5625961%2C120.9993082')
+			.then (response=> response.json())
+			.then (data=> {
+				response.statusCode = 200;
+        response.write(JSON.stringify({ message: data }));
         response.end();
-    } else if (method === 'POST' && url === '/add-user') {
-        // Example endpoint: POST /add-user
-        let body = '';
-        request.on('data', (chunk) => {
-            body += chunk.toString();
-        });
-        request.on('end', () => {
-            const newUser = JSON.parse(body);
-            response.statusCode = 201;
-            response.write(JSON.stringify({ message: 'User added', user: newUser }));
-            response.end();
-        });
+
+			})
     } else {
         // Handle 404 for unknown routes
         response.statusCode = 404;
