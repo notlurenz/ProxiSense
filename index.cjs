@@ -17,7 +17,7 @@ const server = http.createServer((request, response) => {
         response.write(JSON.stringify({ message: 'Welcome to the API!' }));
         response.end();
     } else if(method === 'GET' && url === '/weather'){
-			fetch('https://api.weatherapi.com/v1/current.json?key=99755e46731a4b1b81730018242109&q=14.587702979775983, 120.97596229900596')
+			fetch('https://api.weatherapi.com/v1/current.json?key=99755e46731a4b1b81730018242109&q=14.611581277767675, 120.9627894366885')
 			.then (response=> response.json())
 			.then (data=> {
 				const precip = data.current.precip_mm;
@@ -36,8 +36,9 @@ const server = http.createServer((request, response) => {
 			  } 
 
 
+
 				response.statusCode = 200;
-        response.write(JSON.stringify({ message: rainStatus }));
+        response.write(JSON.stringify({ message: weatherStatus }));
         response.end();
 
 
