@@ -20,7 +20,7 @@ const server = http.createServer((request, response) => {
 			fetch('https://api.weatherapi.com/v1/current.json?key=99755e46731a4b1b81730018242109&q=14.587039178154653, 120.9761773943609')
 			.then (response=> response.json())
 			.then (data=> {
-				const precip = 0;
+				const precip = data.current.precip_mm;
 				let rainStatus;
 				if (precip >= 2 && precip <= 4) {
 					rainStatus = 'Light rain'
@@ -28,12 +28,14 @@ const server = http.createServer((request, response) => {
 					rainStatus = 'Moderate rain'
 				} else if (precip >= 15  && precip <= 20) {
 					rainStatus = 'Rain or strong rain'
-				}
-				
+				}else if (precip > 20) {
+					rainStatus = 'Heavy rain';
+			  } else {
+					rainStatus = 'No significant rain';
+			  }
 
-				
 
-				
+			
 				response.statusCode = 200;
         response.write(JSON.stringify({ message: rainStatus }));
         response.end();
