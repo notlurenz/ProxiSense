@@ -22,7 +22,7 @@ const server = http.createServer((request, response) => {
 			.then (data=> {
 				const precip = data.current.precip_mm;
 				let weatherStatus;
-				if (precip = 0 ){
+				if (precip === 0 ){
 					weatherStatus = 'Sunny'
 				}
 				else if (precip >= 2 && precip <= 4) {
